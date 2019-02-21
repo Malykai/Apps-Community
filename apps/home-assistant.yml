@@ -12,7 +12,7 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'home-assistant'
+        pgrole: 'hass'
         intport: '8123'
         extport: '8123'
         image: 'homeassistant/home-assistant'

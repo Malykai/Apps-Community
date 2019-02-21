@@ -12,7 +12,7 @@
     # FACTS #######################################################################
     - name: 'Set Known Facts'
       set_fact:
-        pgrole: 'nextcloud'
+        pgrole: 'cloud'
         intport: '443'
         extport: '4645'
         image: 'linuxserver/nextcloud'
