@@ -140,6 +140,7 @@
     - name: 'Auth Check 2'
       set_fact:
         gauth: ''
+        orgauth: ''
       when: authcheck.stat.exists
 
   when: oauth.stdout == 'good'
@@ -147,6 +148,7 @@
 - name: 'OAuth Exe'
   set_fact:
     gauth: ''
+    orgauth: ''
   when: not oauth.stdout == 'good'
 
 - debug: msg="OAuth - {{oauth.stdout}}"
