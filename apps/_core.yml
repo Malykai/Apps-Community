@@ -134,6 +134,7 @@
     - name: 'Auth Check 1'
       set_fact:
         gauth: 'http://oauth:4181'
+        orgauth: 'http://organizr:8040/api/?v1/auth&group='
       when: not authcheck.stat.exists
 
     - name: 'Auth Check 2'
