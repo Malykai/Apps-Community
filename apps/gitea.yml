@@ -28,7 +28,7 @@
     - name: 'Adding Traefik'
       set_fact:
         pg_labels:
-          ##########traefik.frontend.auth.forward.address: '{{gauth}}' ##Disabled OAuth as you cant user terminal for cloning any repo
+          ##########traefik.frontend.auth.forward.address: '{{orgauth + "1"}}' ##Disabled OAuth as you cant user terminal for cloning any repo
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}},{{tldset}}'

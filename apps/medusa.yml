@@ -30,7 +30,7 @@
       set_fact:
         pg_labels:
           traefik.protocol: 'https'
-          traefik.frontend.auth.forward.address: '{{gauth}}'
+          traefik.frontend.auth.forward.address: '{{orgauth + "1"}}'
           traefik.enable: 'true'
           traefik.port: '{{intport}}'
           traefik.frontend.rule: 'Host:{{pgrole}}.{{domain.stdout}},{{tldset}}'
