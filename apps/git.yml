@@ -7,7 +7,7 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'git'
-        intport: '443'
+        intport: '80'
         extport: '8443'
         image: 'gitlab/gitlab-ce'
 
