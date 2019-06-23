@@ -7,9 +7,9 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'che'
-        intport: '8080'
+        intport: '80'
         extport: '5050'
-        image: 'eclipse/che'
+        image: 'eclipse/che-server'
 
     # CORE (MANDATORY) ############################################################
     - name: 'Including cron job'
@@ -36,6 +36,7 @@
           - '/opt/appdata/{{pgrole}}/sync:/sync'
           - '/opt/appdata/{{pgrole}}/unison:/unison'
           - '/opt/appdata/{{pgrole}}/chedir:/chedir'
+          - '/var/run/docker.sock:/tmp/docker.sock:ro'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -44,8 +45,12 @@
           PGID: '1000'
           CHE_SINGLE_PORT: true
           CHE_HOST: '{{pgrole}}.{{domain.stdout}}'
-          CHE_PORT: '8080'
+          CHE_PORT: '{{intport}}'
           CHE_CONTAINER: 'che'
+          CHE_WORKSPACE_VOLUME: '/var/run/docker.sock:/var/run/docker.sock'
+          VIRTUAL_HOST: '{{pgrole}}.{{domain.stdout}}'
+          CHE_DOCKER_SERVER__EVALUATION__STRATEGY: 'docker-local'
+          CHE_DOCKER_IP_EXTERNAL: '{{pgrole}}.{{domain.stdout}}'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
