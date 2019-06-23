@@ -27,7 +27,15 @@
       set_fact:
         pg_volumes:
           - '/opt/appdata/{{pgrole}}:/config'
+          - '/opt/appdata/{{pgrole}}/data:/data'
           - '/etc/localtime:/etc/localtime:ro'
+          - '/opt/appdata/{{pgrole}}/data/instance:/data/instance'
+          - '/opt/appdata/{{pgrole}}/data/backup:/data/backup'
+          - '/opt/appdata/{{pgrole}}/repo:/repo'
+          - '/opt/appdata/{{pgrole}}/assembly:/assembly'
+          - '/opt/appdata/{{pgrole}}/sync:/sync'
+          - '/opt/appdata/{{pgrole}}/unison:/unison'
+          - '/opt/appdata/{{pgrole}}/chedir:/chedir'
 
     - name: 'Setting PG ENV'
       set_fact:
@@ -35,6 +43,9 @@
           PUID: '1000'
           PGID: '1000'
           CHE_SINGLE_PORT: true
+          CHE_HOST: '{{pgrole}}.{{domain.stdout}}'
+          CHE_PORT: '8080'
+          CHE_CONTAINER: 'che'
 
     # MAIN DEPLOYMENT #############################################################
     - name: 'Deploying {{pgrole}}'
