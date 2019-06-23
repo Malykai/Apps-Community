@@ -46,7 +46,7 @@
           CHE_SINGLE_PORT: 'true'
           #CHE_HOST: '{{pgrole}}.{{domain.stdout}}'
           CHE_PORT: '{{intport}}'
-          #CHE_CONTAINER: 'che'
+          CHE_CONTAINER: 'che'
           CHE_WORKSPACE_VOLUME: '/opt/appdata/{{pgrole}}/workspace:/workspace'
           VIRTUAL_HOST: '{{pgrole}}.{{domain.stdout}}'
           CHE_DOCKER_SERVER__EVALUATION__STRATEGY: 'docker-local'
