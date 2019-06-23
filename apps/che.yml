@@ -7,7 +7,7 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'che'
-        intport: '5050'
+        intport: '8080'
         extport: '5050'
         image: 'eclipse/che'
 
