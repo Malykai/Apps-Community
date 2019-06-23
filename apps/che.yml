@@ -36,7 +36,7 @@
           - '/opt/appdata/{{pgrole}}/sync:/sync'
           - '/opt/appdata/{{pgrole}}/unison:/unison'
           - '/opt/appdata/{{pgrole}}/chedir:/chedir'
-          - '/var/run/docker.sock:/tmp/docker.sock'
+          - '/var/run/docker.sock:/var/run/docker.sock'
 
     - name: 'Setting PG ENV'
       set_fact:
