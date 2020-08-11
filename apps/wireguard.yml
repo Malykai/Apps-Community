@@ -62,8 +62,11 @@
         ports:
           - '0.0.0.0:51820:51820/udp'
         pull: yes
-        volumes: '{{pg_volumes}}'
+        mounts: '{{pg_volumes}}'
         env: '{{pg_env}}'
+        detach: no
+        sysctls:
+          - net.ipv4.conf.all.src_valid_mark: 1
         capabilities:
           - NET_ADMIN
           - SYS_MODULE
