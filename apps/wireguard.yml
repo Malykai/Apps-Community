@@ -65,7 +65,7 @@
         env: '{{pg_env}}'
         detach: no
         sysctls:
-          - net.ipv4.conf.all.src_valid_mark: 1
+          - 'net.ipv4.conf.all.src_valid_mark=1'
         volumes: '{{pg_volumes}}'
         capabilities:
           - NET_ADMIN
