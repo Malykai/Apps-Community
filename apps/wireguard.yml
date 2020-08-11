@@ -65,8 +65,8 @@
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
         capabilities:
-          - net_admin
-          - sys_module
+          - NET_ADMIN
+          - SYS_MODULE
         restart_policy: unless-stopped
         networks:
           - name: bridge
