@@ -67,7 +67,5 @@
         restart_policy: unless-stopped
         networks:
           - name: bridge
-            aliases:
-              - '{{pgrole}}'
         state: started
         labels: '{{pg_labels}}'
