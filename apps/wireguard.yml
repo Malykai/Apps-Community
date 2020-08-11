@@ -1,0 +1,73 @@
+#
+# Title:      <BASE>
+# Author(s):  Malykai
+# GNU:        General Public License v3.0
+################################################################################
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    # FACTS #######################################################################
+    - name: 'Set Known Facts'
+      set_fact:
+        pgrole: 'wireguard'
+        intport: '51820'
+        extport: '51820'
+        image: 'linuxserver/wireguard'
+
+    - name: Find my public ip
+      uri: 
+        url: http://ifconfig.me/ip
+        return_content: yes
+      register: ip_response
+
+    # CORE (MANDATORY) ############################################################
+    - name: 'Including cron job'
+      include_tasks: '/opt/communityapps/apps/_core.yml'
+
+    # LABELS ######################################################################
+    - name: 'Adding Traefik'
+      set_fact:
+        pg_labels:
+          traefik.enable: 'false'
+
+    - name: 'Setting PG Volumes'
+      set_fact:
+        pg_volumes:
+          - '/etc/localtime:/etc/localtime:ro'
+          - '/opt/appdata/{{pgrole}}:/config'
+          - '/lib/modules:/lib/modules'
+
+    - name: 'Setting PG ENV'
+      set_fact:
+        pg_env:
+          PEERDNS: 'auto'
+          INTERNAL_SUBNET: '10.13.13.0'
+          PUID: '1000'
+          PGID: '1000'
+          TZ: 'America/Chicago'
+          SERVERURL: '{{ip_response}}'
+          SERVERPORT: '51820'
+          PEERS: '3'
+          PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+          HOME: '/root'
+          LANGUAGE: 'en_US.UTF-8'
+          LANG: 'en_US.UTF-8'
+          TERM: 'xterm'
+          DEBIAN_FRONTEND: 'noninteractive'
+
+    # MAIN DEPLOYMENT #############################################################
+    - name: 'Deploying {{pgrole}}'
+      docker_container:
+        name: '{{pgrole}}'
+        image: '{{image}}'
+        pull: yes
+        volumes: '{{pg_volumes}}'
+        env: '{{pg_env}}'
+        restart_policy: unless-stopped
+        networks:
+          - name: plexguide
+            aliases:
+              - '{{pgrole}}'
+        state: started
+        labels: '{{pg_labels}}'
