@@ -66,11 +66,7 @@
         detach: no
         sysctls:
           - net.ipv4.conf.all.src_valid_mark: 1
-        mounts: [
-          '/etc/localtime:/etc/localtime:ro',
-          '/opt/appdata/{{pgrole}}:/config',
-          '/lib/modules:/lib/modules'
-          ]
+        volumes: '{{pg_volumes}}'
         capabilities:
           - NET_ADMIN
           - SYS_MODULE
