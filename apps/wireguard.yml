@@ -46,7 +46,7 @@
           PUID: '1000'
           PGID: '1000'
           TZ: 'America/Chicago'
-          SERVERURL: '{{ip_response}}'
+          SERVERURL: '{{ip_response.content}}'
           SERVERPORT: '51820'
           PEERS: '3'
           PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
