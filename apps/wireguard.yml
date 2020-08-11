@@ -11,8 +11,6 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'wireguard'
-        intport: '51820/udp'
-        extport: '51820/udp'
         image: 'linuxserver/wireguard'
 
     - name: Find my public ip
@@ -61,8 +59,8 @@
       docker_container:
         name: '{{pgrole}}'
         image: '{{image}}'
-        published_ports:
-          - '{{ports.stdout}}{{extport}}:{{intport}}'
+        ports:
+          - '0.0.0.0:51820:51820/udp'
         pull: yes
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
