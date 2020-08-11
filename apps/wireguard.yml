@@ -11,6 +11,8 @@
     - name: 'Set Known Facts'
       set_fact:
         pgrole: 'wireguard'
+        intport: '51820'
+        extport: '51820'
         image: 'linuxserver/wireguard'
 
     - name: Find my public ip
