@@ -64,6 +64,9 @@
         pull: yes
         volumes: '{{pg_volumes}}'
         env: '{{pg_env}}'
+        capabilities:
+          - net_admin
+          - sys_module
         restart_policy: unless-stopped
         networks:
           - name: bridge
