@@ -61,11 +61,10 @@
       docker_container:
         name: '{{pgrole}}'
         image: '{{image}}'
-        ports:
+        published_ports:
           - '0.0.0.0:51820:51820/udp'
         pull: yes
         env: '{{pg_env}}'
-        detach: no
         sysctls:
           net.ipv4.conf.all.src_valid_mark: 1
         volumes: '{{pg_volumes}}'
